@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "550093645489",
+    "project_id": "flutteravenirmetro",
+    "storage_bucket": "flutteravenirmetro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550093645489:android:b7b6e4339ec11d3f6b2490",
+        "android_client_info": {
+          "package_name": "com.capgemini.avenirmetro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "550093645489-3ft371217t1rp1r6g45kvqgkr1dg7qdj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCImAcJf8zekPQP7yDUlTTA-d5XI0FDgpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "550093645489-3ft371217t1rp1r6g45kvqgkr1dg7qdj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
