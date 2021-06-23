@@ -4,18 +4,37 @@ import 'package:avenirmetro/src/views/materiel/materiel.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  int selectedIndex;
+
+  HomePage({Key key, this.selectedIndex = 1}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 1;
   int numero = 0;
-  var mesEssais = true;
-  var materiel = false;
-  var annuaire = false;
+  PageController _pageController;
+
+  final List<Widget> tabPages = [
+    Materiel(),
+    MesEssais(),
+    Annuaire(),
+  ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _pageController = PageController(initialPage: widget.selectedIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,37 +70,22 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: Stack(
-        children: [
-          Visibility(visible: mesEssais, child: MesEssais()),
-          Visibility(visible: materiel, child: Materiel()),
-          Visibility(visible: annuaire, child: Annuaire()),
-        ],
+      body: PageView(
+        children: tabPages, //[widget.selectedIndex],
+        onPageChanged: (newPage) {
+          setState(() {
+            this.widget.selectedIndex = newPage;
+          });
+        },
+        controller: _pageController,
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (int index) {
-          setState(() {
-            _selectedIndex = index;
-
-            print(_selectedIndex);
-
-            if (_selectedIndex == 1) {
-              mesEssais = true;
-              materiel = false;
-              annuaire = false;
-            } else if (_selectedIndex == 2) {
-              mesEssais = false;
-              materiel = false;
-              annuaire = true;
-            } else if (_selectedIndex == 0) {
-              mesEssais = false;
-              materiel = true;
-              annuaire = false;
-            }
-          });
+          this._pageController.animateToPage(index,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInOut);
         },
-        currentIndex: _selectedIndex,
-        //___backgroundColor: Colors.blueGrey,___ ==couleur NavigationBar==
+        currentIndex: widget.selectedIndex,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               title: Text("MATERIEL"), icon: Icon(Icons.handyman_outlined)),
@@ -92,5 +96,17 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  void onPageChanged(int page) {
+    setState(() {
+      this.widget.selectedIndex = page;
+      print(page);
+    });
+  }
+
+  void onTabTapped(int index) {
+    this._pageController.animateToPage(index,
+        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
   }
 }
