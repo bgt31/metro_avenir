@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.capgemini.avenirmetro">
+    package="com.example.flutter_app">
    <application
         android:label="Metro Avenir"
         android:icon="@mipmap/ic_launcher">

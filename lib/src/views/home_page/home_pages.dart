@@ -1,12 +1,14 @@
-import 'package:avenirmetro/src/views/annuaire/annuaire.dart';
-import 'package:avenirmetro/src/views/essais/mes_essais.dart';
-import 'package:avenirmetro/src/views/materiel/materiel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/src/views/annuaire/annuaire.dart';
+import 'package:flutter_app/src/views/essais/mes_essais.dart';
+import 'package:flutter_app/src/views/materiel/materiel.dart';
 
 class HomePage extends StatefulWidget {
   int selectedIndex;
+  bool isDarkMode;
 
-  HomePage({Key key, this.selectedIndex = 1}) : super(key: key);
+  HomePage({Key key, this.selectedIndex = 1, this.isDarkMode = true})
+      : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -15,12 +17,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int numero = 0;
   PageController _pageController;
-
-  final List<Widget> tabPages = [
-    Materiel(),
-    MesEssais(),
-    Annuaire(),
-  ];
 
   @override
   void initState() {
@@ -37,6 +33,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> tabPages = [
+      Materiel(),
+      MesEssais(
+        isDarkMode: widget.isDarkMode,
+      ),
+      Annuaire(),
+    ];
+
     return Scaffold(
       drawer: Drawer(
         child: ListView(
@@ -62,22 +66,46 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       appBar: AppBar(
-        title: Text("Bonjour Clement"),
+        title: Text("Bonjour Clément"),
         centerTitle: true,
+        elevation: 0,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 1),
+            padding: const EdgeInsets.only(right: 24),
+            child: IconButton(
+              icon: widget.isDarkMode == true
+                  ? Icon(Icons.nightlight_round)
+                  : Icon(Icons.wb_sunny),
+              onPressed: () {
+                setState(() {
+                  widget.isDarkMode = !widget.isDarkMode;
+                });
+                print(widget.isDarkMode);
+                /*Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MesEssais(
+                        isDarkMode: isDarkMode,
+                      ),
+                    ));*/
+              },
+            ),
           )
         ],
       ),
-      body: PageView(
-        children: tabPages, //[widget.selectedIndex],
-        onPageChanged: (newPage) {
-          setState(() {
-            this.widget.selectedIndex = newPage;
-          });
-        },
-        controller: _pageController,
+      body: Container(
+        //color: widget.isDarkMode == true ? Colors.grey[100] : Colors.black54,
+        child: PageView(
+          children: tabPages, //[widget.selectedIndex],
+          onPageChanged: (newPage) {
+            setState(() {
+              this.widget.selectedIndex = newPage;
+              this.widget.isDarkMode = false;
+              print(widget.isDarkMode);
+            });
+          },
+          controller: _pageController,
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (int index) {
@@ -90,7 +118,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
               title: Text("MATERIEL"), icon: Icon(Icons.handyman_outlined)),
           BottomNavigationBarItem(
-              title: Text("ESSAIS"), icon: Icon(Icons.subway_outlined)),
+              title: Text("ESSAIS"), icon: Icon(Icons.train)),
           BottomNavigationBarItem(
               title: Text("ANNUAIRE"), icon: Icon(Icons.menu_book_sharp))
         ],

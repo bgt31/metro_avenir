@@ -1,5 +1,5 @@
-import 'package:avenirmetro/src/views/home_page/home_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/src/views/home_page/home_pages.dart';
 
 class MaterielAddNew extends StatefulWidget {
   MaterielAddNew({Key key}) : super(key: key);
@@ -21,11 +21,7 @@ class _MaterielAddNewState extends State<MaterielAddNew> {
         backgroundColor: Colors.blue[500],
         title: Row(
           children: [
-            Text(
-              'Nouveau Kit',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
+            Text('Nouveau Kit', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
           ],
         ),
       ),
@@ -41,11 +37,7 @@ class _MaterielAddNewState extends State<MaterielAddNew> {
                       Radius.circular(20),
                     ),
                     border: Border.all(color: Colors.blue[200])),
-                child: Icon(
-                  Icons.add_a_photo_rounded,
-                  color: Colors.white,
-                  size: queryData.size.width / 1.15,
-                )),
+                child: Icon(Icons.add_a_photo_rounded, color: Colors.white, size: queryData.size.width/1.15,)),
             Container(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(24, 30, 24, 20),
@@ -59,9 +51,8 @@ class _MaterielAddNewState extends State<MaterielAddNew> {
                           hintText: 'Nom du Kit',
                           border: OutlineInputBorder(),
                         ),
-                        validator: (value) => value == null || value.isEmpty
-                            ? 'SVP écrivez le nom du kit'
-                            : null,
+                        validator: (value) =>
+                        value == null || value.isEmpty ? 'SVP écrivez le nom du kit': null,
                         onChanged: (value) => setState(() => _kitItem = value),
                       ),
                       Padding(
@@ -82,8 +73,7 @@ class _MaterielAddNewState extends State<MaterielAddNew> {
                   ),
                 ),
               ),
-            )
-          ],
+            )],
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -91,7 +81,8 @@ class _MaterielAddNewState extends State<MaterielAddNew> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomePage(),
+              builder: (context) =>
+                  HomePage(),
             ),
           );
         },

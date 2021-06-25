@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'src/views/home_page/home_pages.dart';
-
+import 'package:flutter_app/src/views/login/login.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
+  SystemChrome.setEnabledSystemUIOverlays([]);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(MyApp());
@@ -26,9 +24,9 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: [GlobalMaterialLocalizations.delegate],
       supportedLocales: [const Locale('fr')],
       theme: ThemeData(
-        appBarTheme: AppBarTheme(color: Colors.blue),
-      ),
-      home: HomePage(),
+          appBarTheme: AppBarTheme(color: Colors.grey[100]),
+          primaryColor: Colors.grey),
+      home: Login(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,5 +1,5 @@
-import 'package:avenirmetro/src/views/home_page/home_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/src/views/home_page/home_pages.dart';
 import 'package:intl/intl.dart';
 
 enum CreerAffecterEssai { novelEssai, essaiExistant }
@@ -59,10 +59,15 @@ class _MesEssaisAddNewState extends State<MesEssaisAddNew> {
   var newTypeCreneau;
   var newLieuEssai;
 
+  var light = Colors.grey[100];
+  var dark = Colors.black87;
+  bool backgroundColor = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
           title: Row(
             children: [
               Text(
@@ -77,6 +82,7 @@ class _MesEssaisAddNewState extends State<MesEssaisAddNew> {
             padding: const EdgeInsets.only(top: 14, bottom: 14),
             child: ListView(children: [
               Container(
+                  color: light,
                   child: Padding(
                       padding: const EdgeInsets.only(left: 32, right: 32),
                       child: Form(
